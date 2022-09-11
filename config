@@ -36,20 +36,19 @@ exec --no-startup-id nm-applet
 
 ############          ON BOOT APPS          ############
 exec feh --bg-scale ~/.wallpaper/wallpaper.png
-exec --no-startup-id firefox
-exec --no-startup-id code
-exec --no-startup-id i3-msg 'workspace $ws4; exec i3-sensible-terminal -e "ranger"'
+exec --no-startup-id i3-msg "workspace $ws2" && exec firefox
+exec --no-startup-id i3-msg "workspace $ws3" && exec code
 exec --no-startup-id i3-msg "workspace $ws4" && exec i3-sensible-terminal -e "ranger"
 
 ############          APP SHORTCUTS          ############
-bindsym $mod+Shift+f exec --no-startup-id firefox
-bindsym $mod+Shift+v exec --no-startup-id code
-bindsym $mod+Shift+d exec --no-startup-id discord
+bindsym $mod+Shift+f exec --no-startup-id firefox & exec i3-msg "workspace $ws2"
+bindsym $mod+Shift+v exec --no-startup-id code & exec i3-msg "workspace $ws3"
+bindsym $mod+Shift+d exec --no-startup-id discord & exec i3-msg "workspace $ws5"
 
 
 ############          APP & WORKSPACE ASSOCIATIONS          ############
 assign [class="firefox"] $ws2
-assign [class="code"] $ws3
+assign [class="Code"] $ws3
 assign [class="discord"] $ws5
 
 # Use pactl to adjust volume in PulseAudio.
@@ -118,7 +117,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
