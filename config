@@ -34,16 +34,19 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# enable tapping on touchpad 
+exec xinput set-prop "VEN_04F3:00 04F3:311C Touchpad" "libinput Tapping Enabled" 1
+
 ############          ON BOOT APPS          ############
-exec feh --bg-scale ~/.wallpaper/wallpaper.png
+exec feh --bg-fill ~/Images/wallpapers/wallpaper.png
 exec --no-startup-id i3-msg "workspace $ws2" && exec firefox
-exec --no-startup-id i3-msg "workspace $ws3" && exec code
+exec --no-startup-id i3-msg "workspace $ws3" && exec code --disable-gpu
 exec --no-startup-id i3-msg "workspace $ws4" && exec i3-sensible-terminal -e "ranger"
 
 ############          APP SHORTCUTS          ############
 bindsym $mod+Shift+f exec --no-startup-id firefox & exec i3-msg "workspace $ws2"
-bindsym $mod+Shift+v exec --no-startup-id code & exec i3-msg "workspace $ws3"
-bindsym $mod+Shift+d exec --no-startup-id discord & exec i3-msg "workspace $ws5"
+bindsym $mod+Shift+v exec --no-startup-id code --disable-gpu & exec i3-msg "workspace $ws3"
+bindsym $mod+Shift+d exec --no-startup-id flatpak run com.discordapp.Discord --disable-gpu & exec i3-msg "workspace $ws5"
 
 
 ############          APP & WORKSPACE ASSOCIATIONS          ############
