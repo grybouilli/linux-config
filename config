@@ -39,20 +39,23 @@ exec xinput set-prop "VEN_04F3:00 04F3:311C Touchpad" "libinput Tapping Enabled"
 
 ############          ON BOOT APPS          ############
 exec feh --bg-fill ~/Images/wallpapers/wallpaper.png
-exec --no-startup-id i3-msg "workspace $ws2" && exec firefox
-exec --no-startup-id i3-msg "workspace $ws3" && exec code --disable-gpu
+exec --no-startup-id firefox
+exec --no-startup-id code --disable-gpu
 exec --no-startup-id i3-msg "workspace $ws4" && exec i3-sensible-terminal -e "ranger"
 
 ############          APP SHORTCUTS          ############
 bindsym $mod+Shift+f exec --no-startup-id firefox & exec i3-msg "workspace $ws2"
 bindsym $mod+Shift+v exec --no-startup-id code --disable-gpu & exec i3-msg "workspace $ws3"
 bindsym $mod+Shift+d exec --no-startup-id flatpak run com.discordapp.Discord --disable-gpu & exec i3-msg "workspace $ws5"
+bindsym $mod+Shift+t exec --no-startup-id flatpak run org.telegram.desktop & exec i3-msg "workspace $ws6"
+bindsym $mod+Shift+s exec gnome-screenshot
 
 
 ############          APP & WORKSPACE ASSOCIATIONS          ############
 assign [class="firefox"] $ws2
 assign [class="Code"] $ws3
 assign [class="discord"] $ws5
+assign [class="telegram-desktop"] $ws6
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -142,7 +145,7 @@ set $ws2 "2 : Firefox "
 set $ws3 "3 : Code "
 set $ws4 "4 : Ranger "
 set $ws5 "5 : Discord "
-set $ws6 "6"
+set $ws6 "6 : Telegram "
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -208,7 +211,19 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+
+### WINDOWS COLORS ###
+
+client.focused #52b1d6 #1e92bf #FFFFFF
+client.focused_inactive #112932 #091519 #929292
+client.unfocused #112932 #091519 #929292
 bar {
-        status_command i3status
+        status_command i3status --config ~/.config/i3/i3status.conf
         font pango:DejaVu Sans Mono 11, FontAwesome 11
+        colors {
+            background #112932
+			focused_statusline #FFFFFF
+			focused_workspace #F9C2CD #b66373 #FFFFFF
+			inactive_workspace #423e3f #191112 #9E9E9E
+        }
 }
