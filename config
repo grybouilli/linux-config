@@ -38,7 +38,8 @@ exec --no-startup-id nm-applet
 exec xinput set-prop "VEN_04F3:00 04F3:311C Touchpad" "libinput Tapping Enabled" 1
 
 ############          ON BOOT APPS          ############
-exec feh --bg-fill ~/Images/wallpapers/wallpaper.png
+exec feh --bg-fill ~/Images/wallpapers/wallpaper.png    	# set up background
+exec --no-startup-id compton 					# enables transparent terminals
 exec --no-startup-id firefox
 exec --no-startup-id code --disable-gpu
 exec --no-startup-id i3-msg "workspace $ws4" && exec i3-sensible-terminal -e "ranger"
