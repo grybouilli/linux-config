@@ -1,0 +1,310 @@
+% =============   PACKAGES   ============= %
+
+% ----------       FORMAT       ----------
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ utf8]{ inputenc }
+\usepackage{ lmodern }
+\usepackage{ microtype }
+\usepackage[colorlinks=false, hidelinks]{ hyperref }
+\usepackage{enumitem}
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\usepackage{multicol}
+\usepackage[stable,bottom]{footmisc}
+\usepackage[affil-it]{authblk}
+\usepackage{etoolbox}%
+\usepackage{calc}
+\usepackage{xstring}
+
+% ----------       MATHS       ----------
+
+\usepackage{dsfont}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+
+% ----------       CODE         ----------
+
+\usepackage[outputdir=out,newfloat]{minted}
+\usepackage{forest}
+\usepackage[french,vlined,lined,linesnumbered,boxed]{algorithm2e}
+
+% ----------       GRAPH         ----------
+
+\usepackage{tikz}
+
+% =============   PARAMETERS   ============= %
+
+% ----------       FORMAT       ----------
+
+%authorship
+\newcommand{\theauthorlong}{\scshape Nicolas GRY \thanks{Adresse e-mail: \texttt{nicolasgry@outlook.fr}}}
+\newcommand{\theauthor}{\scshape Nicolas GRY}
+\newcommand{\ENSEIRB}{ENSEIRB-Matmeca, Bordeaux}
+%\author{\theauthor }
+
+% style des notes de bas de page
+\let\origfootrule\footrule
+\renewcommand{\footrule}{\iffootnote{}{\origfootrule}}
+\renewcommand\footnoterule{\origfootrule}
+
+% style entête et bas de page
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection~- ~#1}}
+\renewcommand{\subsectionmark}[1]{}
+
+\newcommand{\Title}{Title}
+\fancypagestyle{grybouilli-page-style}
+{
+  \fancyhf{}% Clear header and footer
+  \pagestyle{fancy}
+  \fancyhead[RO]{\begin{minipage}[b]{.45\textwidth}\nouppercase{\scshape\rightmark}\end{minipage}}
+  \fancyhead[LO]{\begin{minipage}[b]{.45\textwidth}\nouppercase{\scshape\Title}\end{minipage}}
+  \fancyfoot[CO]{\slshape \thepage}% Custom footer
+  \fancyfoot[LO]{\scshape ENSEIRB-Matmeca}%
+  \fancyfoot[RO]{\theauthor}%
+  \renewcommand{\headrulewidth}{2pt}% Line at the header visible
+  \renewcommand{\footrulewidth}{0.6pt}% Line at the footer visible
+}
+
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \fancyfoot[L]{ENSEIRB-Matmeca}%
+  \fancyfoot[R]{\theauthor}
+  \renewcommand{\headrulewidth}{0pt}% Line at the header invisible
+  \renewcommand{\footrulewidth}{0.6pt}% Line at the footer visible
+}
+\pagestyle{grybouilli-page-style}
+
+
+% style des sectionnages
+\titleformat{\part}[hang]{\bfseries\huge}{\thepart}{2pc}{}
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter}{2pc}{}
+\titleformat{name=\chapter, numberless}[hang]{\bfseries\Huge}{Sommaire}{0pc}{} % TOC Title in reports
+
+%%% style des sections %%%
+\renewcommand{\thesection}{\Roman{section}} 
+\renewcommand{\thesubsection}{\thesection\ -\ \arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\thesubsection\alph{subsubsection}}
+
+\definecolor{myrulecolor}{RGB}{0,0,0}% define the color for the rules
+
+\newcommand{\betweenrules}[1]{%
+  \makebox[0pt][r]{\color{myrulecolor}\vrule width 2cm height 1.5ex \hspace{1em}}%
+  #1% the title
+  \hspace{1em}%
+  \color{myrulecolor}%
+  \leaders\hrule height 1.5ex\hfill
+}
+ \titleformat{\section}[display]
+   {\normalfont\scshape\Huge}
+   {}
+   {-15pt}
+   {\betweenrules{\thesection\ - ~#1}}
+
+  \titleformat{name=\section, numberless}[display]
+   {\normalfont\scshape\Huge}
+   {\vspace*{20pt}}
+   {-15pt}
+   {\betweenrules{~#1}} %TOC Title in articles
+
+  
+\titleformat{\subsection}[hang]{\bfseries\large}{\thesubsection ~#1}{2pc}{} 
+\titleformat{name=\subsection, numberless}[hang]{\bfseries\large}{\thesubsection ~#1}{2pc}{} 
+
+\titleformat{\subsubsection}[hang]{\bfseries\normalsize}{}{2pc}{\thesubsubsection ~#1} 
+\titleformat{name=\subsubsection, numberless}[hang]{\bfseries\normalsize}{}{2pc}{\thesubsubsection ~#1} 
+
+\definecolor{RqColor}{RGB}{30,110,50}
+
+\titlespacing{\chapter}{0.5cm}{5cm}{0.5cm}
+\titlespacing{\section}{0cm}{0cm}{.5cm}
+\titlespacing{\subsection}{0cm}{.25cm}{0cm}
+\titlespacing{\subsubsection}{0cm}{0cm}{0.2cm}
+
+% style des paragraphes
+\setlength{\parskip}{6pt}
+
+% style de la toc
+\setcounter{tocdepth}{3} 
+\setcounter{secnumdepth}{3} 
+\titlecontents{section}
+[0cm]             % left margin
+{\vspace{1cm}\bfseries}             % above code
+{\thecontentslabel\ -\ }             % numbered format
+{}             % unnumbered format
+{}             % filler-page-format, e.g dots
+
+
+% ----------       MATHS        ----------
+
+
+% ----------       CODE         ----------
+\definecolor{python_bg}{rgb}{0.96,0.96,0.98}
+\definecolor{bash_bg}{rgb}{0.95,0.95,0.95}
+%\definecolor{cpp_bg}{rgb}{0.18,0.18,0.18}
+\definecolor{cpp_bg}{rgb}{0.97,0.97,0.97}
+
+\setminted[python]{linenos,frame=lines,framerule=1pt,framesep=10pt,breaklines,bgcolor=python_bg, fontsize=\small}
+\setminted[javascript]{linenos,frame=lines,framerule=1pt,framesep=10pt,breaklines,bgcolor=python_bg}
+\setminted[ocaml]{linenos,frame=lines,framerule=1pt,framesep=10pt,breaklines}
+\setminted[cpp]{linenos,frame=leftline,framerule=1pt,framesep=10pt,bgcolor=cpp_bg,breaklines}
+\setminted[bash]{bgcolor=bash_bg,frame=leftline,framerule=2.5pt,breaklines}
+\setminted[gas]{bgcolor=bash_bg,frame=leftline,framerule=2.5pt,breaklines}
+\setminted[Makefile]{linenos,frame=leftline,framerule=2.5pt,framesep=2.5pt,breaklines}
+\usemintedstyle[python]{friendly}
+\usemintedstyle[ocaml]{emacs}
+\usemintedstyle[cpp]{manni}
+\usemintedstyle[javascript]{emacs}
+
+\SetKwProg{Fonction}{fonction}{\\début}{\\fin}
+\newcommand{\assign}[2]{#1 $\leftarrow$ #2 \\}
+% =============   COMMANDS   ============= %
+
+% ----------       FORMAT       ----------
+
+\newcommand{\vers}{$\to \mbox{}$}
+\newcommand{\mdot}{•}           % middle dot
+\newcommand{\edot}{$\circ$}     % empty dot
+\newcommand{\oeuvre}[1]{\emph{"\underline{#1}"}}
+\newcommand\txtcol[2]{\color{#1}#2\color{black}}
+\newcommand\ubf[1]{\underline{\textbf{#1}}}
+% ----------       MATHS        ----------
+
+\newcommand\ubrace[2]{\underset{#2}{\underbrace{#1}}}
+\newcommand\vect[1]{\overset{\to}{#1}}
+\newcommand{\OO}{\mathcal{O}}
+
+\newcommand\NN{\mathbb{N}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\HH{\mathbb{H}}
+\newcommand\EE{\mathbb{E}}
+\newcommand\FF{\mathcal{F}}
+\newcommand\XX{\mathcal{X}}
+\newcommand\func[5]{#1:\quad #2 & \longrightarrow #3 \\ #4 &\longmapsto #5}
+\newcommand\sfunc[3]{#1:\, #2 \longrightarrow #3}
+% ----------       CODE         ----------
+\newcommand{\cobl}[1]{\fontfamily{qcr}\selectfont#1\fontfamily{cmr}\selectfont}
+
+% ----------       FRANÇAIS     ----------
+
+\newcommand\cit[1]{\og \emph{#1} \fg{}}
+
+% =============   ENVIRONMENT   ============= %
+% ----------       FORMAT       ----------
+% ----------       MATHS        ----------
+% ----------       CODE         ----------
+
+\forestset{default preamble=
+  {  for tree={
+    grow=south, l sep=1cm,
+    s sep=0.3cm,
+    inner sep =0.1cm,
+    minimum height=0.8cm,
+    minimum width=0.8cm}}}
+
+
+\newenvironment{codeblock}{
+\fontfamily{qcr}\selectfont}
+{\fontfamily{cmr}\selectfont}
+
+\newenvironment{citpoeme}
+ {
+    \begin{center}
+    \og
+    \begin{itshape}
+ }
+ {
+    \end{itshape}\fg{}\end{center}
+ }
+
+\newenvironment{citemize}[1][$-$]{
+  \begin{adjustwidth}{\textwidth/10}{}
+    \begin{itemize}[label=#1]
+}{
+    \end{itemize}
+  \end{adjustwidth}
+  }
+
+\newenvironment{cenumerate}[1][\arabic*)]{
+  \begin{adjustwidth}{\textwidth/10}{}
+    \begin{enumerate}[label=#1]
+}{
+    \end{enumerate}
+  \end{adjustwidth}
+  }
+
+% LECTURES ENVIRONMENT
+\definecolor{amber}{rgb}{1.0, 0.49, 0.0}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{cadmiumblue}{rgb}{0.0, 0.24, 0.42}
+\definecolor{cadmiumred}{rgb}{0.42, 0.12, 0.12}
+
+
+\newcommand{\statedefsolid}[2][\textwidth]{
+  \par\noindent\tikzstyle{mybox} = [fill=yellow!20,
+   thick,rectangle,inner sep=6pt,path picture={\fill [green!50!black] ([xshift=-8.6cm]path picture bounding box.north) rectangle (path picture bounding box.south west);}]
+  \begin{tikzpicture}
+   \node [mybox] (box){%
+    \begin{minipage}{#1}{#2}\end{minipage}
+   };
+  \end{tikzpicture}
+}
+
+\newcommand{\stateconcsolid}[2][\textwidth]{
+  \par\noindent\tikzstyle{mybox} = [fill=black!7,
+   thick,rectangle,inner sep=6pt,path picture={\fill [blue!50!black] ([xshift=-8.6cm]path picture bounding box.north) rectangle (path picture bounding box.south west);}]
+  \begin{tikzpicture}
+   \node [mybox] (box){%
+    \begin{minipage}{#1}{#2}\end{minipage}
+   };
+  \end{tikzpicture}
+}
+
+\newcommand{\statecustomsolid}[3][\textwidth]{
+  \par\noindent\tikzstyle{mybox} = [fill=black!7,
+   thick,rectangle,inner sep=6pt,path picture={\fill [red!50!black] ([xshift=-8.6cm]path picture bounding box.north) rectangle (path picture bounding box.south west);}]
+  \begin{tikzpicture}
+   \node [mybox] (box){%
+    \begin{minipage}{#1}{
+      {\color{cadmiumred}\textbf{#2}}
+      
+      #3
+    }
+    \end{minipage}
+   };
+  \end{tikzpicture}
+}
+
+\newenvironment{definition}
+{
+{\color{cadmiumgreen} \textbf{Définition}}
+
+}{
+}
+
+\newenvironment{concept}
+{
+{\color{cadmiumblue} \textbf{Concept}}
+
+}{
+}
+% modèle:
+% =============   COMMANDS   ============= %
+% ==========       FORMAT       ==========
+% ==========       MATHS        ==========
+% ==========       CODE         ==========
