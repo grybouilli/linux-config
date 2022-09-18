@@ -7,3 +7,4 @@
 - If greeter doesn't work : install possibly missing intel modules.
 - Latex file is to be put at location given by `kpsewhich -var-value=TEXMFHOME`. Then run `texhash`.
 - To enebale transparent background : install `compton` and put `compton.conf` file at `~/.config/compton.conf`
+- For terminal customization : https://github.com/Gogh-Co/Gogh
