@@ -5,3 +5,4 @@
 - Install xinput to check the touchpad id and change corresponding line in the i3 config file.
 - Install Font Awesome 5.12 and 6.2 to have icons in i3bar.
 - If greeter doesn't work : install possibly missing intel modules.
+- Latex file is to be put at location given by `kpsewhich -var-value=TEXMFHOME`. Then run `texhash`.
