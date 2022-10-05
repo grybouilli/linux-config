@@ -220,7 +220,7 @@ client.focused_inactive #112932 #091519 #929292
 client.unfocused #112932 #091519 #929292
 bar {
         status_command i3status --config ~/.config/i3/i3status.conf
-        font pango:DejaVu Sans Mono 11, FontAwesome 11
+        font pango: DejaVu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Brands 12
         colors {
             background #112932
 			focused_statusline #FFFFFF
