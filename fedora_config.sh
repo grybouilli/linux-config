@@ -30,11 +30,6 @@ sudo dnf install compton
 mv linux-config/compton.conf ~/.config/compton.conf
 bash -c "$(wget -qO- https://git.io/vQgMr)"
 
-# setup backlight
-echo "Setting up xbacklight..."
-sudo dnf install xbacklight
-sudo mv linux-config/xorg.conf /etc/X11/xorg.conf
-
 # setup latex
 echo "Setting up latex..."
 sudo dnf install texlive-scheme-full
