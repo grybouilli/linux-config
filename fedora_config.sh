@@ -48,3 +48,11 @@ if [ $answer = n ];
 then
     nano ~/.config/i3/config
 fi
+
+#setup gpu to use intel gpu as primary 
+sudo dnf install python3-pip
+git clone https://github.com/geminis3/envycontrol.git
+cd envycontrol
+sudo pip3 install .
+sudo envycontrol -s integrated
+
